@@ -1,33 +1,53 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, Button, Alert, Linking } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Alert,
+  Linking,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
+import Auth, { eraseUserData, getUserData } from './screens/Auth';
+import { Root } from 'native-base';
 
+export default function App() {
+  const [isAuth, setIsAuth] = useState(false);
 
-Linking.getInitialURL().then(url =>{
-console.log(url);
-})
-Linking.addEventListener("/oauth/callback", getData)
-function getData(e){
-  console.log(e);
-}
+  const setAuth = () => {
+    setIsAuth(true);
+  };
 
-async function goApp(){
-  await Linking.openURL('https://api.imgur.com/oauth2/authorize?client_id=04f7ce5c8c9437f&response_type=token');
-}
+  const disconnect = () => {
+    setIsAuth(false);
+  };
 
-export default function App(){
+  useEffect(() => {
+    getUserData().then((value) => {
+      if (value !== 'null' && value !== null) setAuth();
+    });
+  }, []);
+
   return (
-    <View>
-      <Text>
-        hello world!
-      </Text>
-      <Button
-      onPress={goApp}
-      title="go to app"
-      color="blue"
-      accessibilityLabel="go to app"/>
-<StatusBar style="auto"/>
-    </View>
+    <Root>
+      {!isAuth && (
+        <>
+          <Text>Not Connected</Text>
+          <Auth setAuth={setAuth} />
+        </>
+      )}
+      {isAuth && (
+        <SafeAreaView>
+          <Text>Hello You are connected</Text>
+
+          <TouchableOpacity onPress={() => eraseUserData().then(disconnect())}>
+            <Text>Disconnect</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      )}
+    </Root>
   );
 }
 

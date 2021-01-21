@@ -1,13 +1,54 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Alert,
+  Linking,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
+import Auth, { eraseUserData, getUserData } from './screens/Auth';
+import { Root } from 'native-base';
 
 export default function App() {
+  const [isAuth, setIsAuth] = useState(false);
+
+  const setAuth = () => {
+    setIsAuth(true);
+  };
+
+  const disconnect = () => {
+    setIsAuth(false);
+  };
+
+  useEffect(() => {
+    getUserData().then((value) => {
+      if (value !== 'null' && value !== null) setAuth();
+    });
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Root>
+      {!isAuth && (
+        <>
+          <Text>Not Connected</Text>
+          <Auth setAuth={setAuth} />
+        </>
+      )}
+      {isAuth && (
+        <SafeAreaView style={styles.container}>
+       
+
+          <TouchableOpacity onPress={() => eraseUserData().then(disconnect())}>
+            <Text>Logout</Text>
+          </TouchableOpacity>
+          <StatusBar style="auto" />
+        </SafeAreaView>
+      )}
+    </Root>
   );
 }
 

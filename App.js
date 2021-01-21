@@ -39,12 +39,13 @@ export default function App() {
         </>
       )}
       {isAuth && (
-        <SafeAreaView>
-          <Text>Hello You are connected</Text>
+        <SafeAreaView style={styles.container}>
+       
 
           <TouchableOpacity onPress={() => eraseUserData().then(disconnect())}>
-            <Text>Disconnect</Text>
+            <Text>Logout</Text>
           </TouchableOpacity>
+          <StatusBar style="auto" />
         </SafeAreaView>
       )}
     </Root>

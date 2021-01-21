@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   Alert,
   Linking,
   SafeAreaView,
@@ -12,6 +11,10 @@ import {
 } from 'react-native';
 import Auth, { eraseUserData, getUserData } from './screens/Auth';
 import { Root } from 'native-base';
+import BottomNavigator from "./BottomNavigator";
+import User from "./User.js"
+
+
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -40,23 +43,33 @@ export default function App() {
       )}
       {isAuth && (
         <SafeAreaView style={styles.container}>
-       
-
-          <TouchableOpacity onPress={() => eraseUserData().then(disconnect())}>
-            <Text>Logout</Text>
+          <TouchableOpacity onPress={() => eraseUserData().then(disconnect())} style={styles.t}>
+            <Text >Logout</Text>
           </TouchableOpacity>
           <StatusBar style="auto" />
+          <BottomNavigator />
+          <User/>
         </SafeAreaView>
+        
       )}
+
     </Root>
+
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: 'white',
     justifyContent: 'center',
   },
+
+  t:{
+   
+    alignItems:'center',
+    justifyContent: 'center',
+  },
+
 });

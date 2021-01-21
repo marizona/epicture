@@ -46,9 +46,9 @@ export default function App() {
           <TouchableOpacity onPress={() => eraseUserData().then(disconnect())} style={styles.t}>
             <Text >Logout</Text>
           </TouchableOpacity>
+          <StatusBar style="auto" />
           <BottomNavigator />
           <User/>
-          <StatusBar style="auto" />
         </SafeAreaView>
         
       )}

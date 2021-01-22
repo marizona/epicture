@@ -37,7 +37,7 @@ export const getUserData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('user_data');
     console.log(
-      '🚀 ~ file: index.js ~ line 39 ~ getUserData ~ jsonValue',
+      '~ file: index.js ~ line 39 ~ getUserData ~ jsonValue',
       jsonValue,
     );
     if (jsonValue === 'null') return jsonValue;
@@ -88,7 +88,7 @@ function Auth(props) {
         date: new Date().toJSON(),
       };
       console.log(
-        '🚀 ~ file: index.js ~ line 94 ~ getToken ~ userData',
+        '~ file: index.js ~ line 94 ~ getToken ~ userData',
         userData,
       );
 

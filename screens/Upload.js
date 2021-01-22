@@ -7,12 +7,17 @@ import {Image,
         StyleSheet,
         TouchableOpacity,
         Text,
+        StatusBar,
+        TextInput,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Upload = () => {
     const [image, setImage] = useState(null);
+    const [title, setTitle] = useState('Insert title');
+    const [description, setContent] = useState('Insert Description');
 
   useEffect(() => {
     (async () => {
@@ -34,20 +39,27 @@ const Upload = () => {
       base64:true,
     });
 
-    console.log('result', result);
+    //console.log('result', result);
 
     if (!result.cancelled) {
       setImage(result);
     }
   };
     const ImgUpload = async () => {
+      const jsonValue = await AsyncStorage.getItem('user_data');
+      const data = JSON.parse(jsonValue)
       var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer d274fad811df1542f0535e33ec0e0671c2e7b213");
+      let token = data.acess_token;
+      myHeaders.append("Authorization", `Bearer ${token}`);
 
 
       var formdata = new FormData();
-      var img = image.uri.split(',');
-      formdata.append("image", img[1]);
+      
+      formdata.append("image", image.base64, "title", title);
+      formdata.append("title", title);
+      formdata.append("description", description);
+      console.log(image.base64); 
+      formdata.append("type", "base64");
 
       var requestOptions = {
         method: 'POST',
@@ -62,13 +74,20 @@ const Upload = () => {
         .catch(error => console.log('error', error));
     };
 
-    
     return (
         <SafeAreaView >
           <View style={styles.image}>
-          <Text style={{ alignContent: 'center', justifyContent:'center', position:'relative'}}>Post your image</Text>
-            {/* DISPLAY IMAGE UPLOAD */}
-            {image && <Image source={{ uri: image.uri}} style={{ width: 300, height:200 }} /> }
+          <Text style={{ marginBottom: 20, fontSize: 20, fontWeight: "bold" }}>Post your image</Text>
+          <TextInput
+              style={{ height: 40, width: 200, borderColor: 'gray', borderWidth: 1, marginBottom: 20, borderRadius: 10, textAlign : "center"  }}
+              onChangeText={text => setTitle(text)}
+              value={title}
+            />
+            <TextInput
+              style={{ height: 100, width: 200, borderColor: 'gray', borderWidth: 1, borderRadius: 10, textAlign : "center" }}
+              onChangeText={text => setContent(text)}
+              value={description}
+            />
           </View>
           <View style={styles.screenContainer}>
             {/* ADD BUTTON IMAGE */}
@@ -80,6 +99,11 @@ const Upload = () => {
                   <Text>Add</Text>
                 </View>
             </TouchableOpacity>
+
+            <View>
+            {/* DISPLAY IMAGE UPLOAD */}
+            {image && <Image source={{ uri: image.uri}} style={{ width: 400, height:200, marginBottom: 20 }} /> }
+          </View>
 
             {/* SEND IMAGE */}
             <TouchableOpacity 
@@ -97,17 +121,19 @@ const Upload = () => {
 
 const styles = StyleSheet.create({
   screenContainer: {
-    flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   addButton: {
-    width: 100,
-    height:70,
+    width: 60,
+    height:40,
     backgroundColor: "red",
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 10,
     borderRadius: 10,
+    marginBottom: 15,
   },
   sendButton: {
     width: 100,
@@ -117,15 +143,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 10,
 },
-  image: {
-    
-    alignItems: "center",
-    marginBottom: 10,
-    position: 'absolute',
-    bottom: 70,
-    right: 10,
-    left:10,
-}
+   image: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+ }
 })
 
 export default Upload;

@@ -13,11 +13,12 @@ import Auth, { eraseUserData, getUserData } from './screens/Auth';
 import { Root } from 'native-base';
 import BottomNavigator from "./BottomNavigator";
 import User from "./User.js"
-
+import Upload from "./screens/Upload"
 
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
 
   const setAuth = () => {
     setIsAuth(true);
@@ -47,10 +48,13 @@ export default function App() {
             <Text >Logout</Text>
           </TouchableOpacity>
           <StatusBar style="auto" />
-          <BottomNavigator />
-          <User/>
+          {showUpload && <Upload />}
+          <BottomNavigator setShowUpload={setShowUpload}
+            showUpload={showUpload} />
+
+          <User />
         </SafeAreaView>
-        
+
       )}
 
     </Root>
@@ -66,9 +70,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  t:{
-   
-    alignItems:'center',
+  t: {
+
+    alignItems: 'center',
     justifyContent: 'center',
   },
 

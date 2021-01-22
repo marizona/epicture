@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Icon } from 'react-native-elements'
+import Upload from './screens/Upload';
 
 class BottomNavigator extends Component {
     render() {
+        const {ShowUpload, setShowUpload}=this.props;
         return (
             <View style={{
                 flex: 1,
@@ -28,7 +30,7 @@ class BottomNavigator extends Component {
                         containerStyle={{ alignSelf: 'center' }}
                         reverse
                         size={28}
-                        onPress={() => { }}
+                        onPress={()=> setShowUpload(!ShowUpload)}
                     />
                 </View>
                 <View style={{

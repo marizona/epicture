@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import { StatusBar } from "expo-status-bar";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,13 +8,13 @@ import {
   Linking,
   SafeAreaView,
   TouchableOpacity,
-} from 'react-native';
-import Auth, { eraseUserData, getUserData } from './screens/Auth';
-import { Root } from 'native-base';
+} from "react-native";
+import Auth, { eraseUserData, getUserData } from "./screens/Auth";
+import { Root } from "native-base";
 import BottomNavigator from "./BottomNavigator";
 import User from "./User.js"
 import Upload from "./screens/Upload"
-
+import SearchingBar from "./screens/SearchingBar/SearchingBar";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -30,7 +30,7 @@ export default function App() {
 
   useEffect(() => {
     getUserData().then((value) => {
-      if (value !== 'null' && value !== null) setAuth();
+      if (value !== "null" && value !== null) setAuth();
     });
   }, []);
 
@@ -44,9 +44,13 @@ export default function App() {
       )}
       {isAuth && (
         <SafeAreaView style={styles.container}>
-          <TouchableOpacity onPress={() => eraseUserData().then(disconnect())} style={styles.t}>
-            <Text >Logout</Text>
+          <TouchableOpacity
+            onPress={() => eraseUserData().then(disconnect())}
+            style={styles.t}
+          >
+            <Text>Logout</Text>
           </TouchableOpacity>
+          <SearchingBar />
           <StatusBar style="auto" />
           {showUpload && <Upload />}
           <BottomNavigator setShowUpload={setShowUpload}
@@ -56,10 +60,7 @@ export default function App() {
         </SafeAreaView>
 
       )}
-
     </Root>
-
-
   );
 }
 
@@ -76,5 +77,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
 });

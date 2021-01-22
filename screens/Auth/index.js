@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { WebView } from 'react-native-webview';
-import AsyncStorage from '@react-native-community/async-storage';
+import { WebView } from "react-native-webview";
+import AsyncStorage from "@react-native-community/async-storage";
 
 /**
  * This function is used to save the user data when
@@ -12,9 +12,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 export const saveUserData = async (value) => {
   try {
     const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem('user_data', jsonValue);
+    await AsyncStorage.setItem("user_data", jsonValue);
   } catch (e) {
-    console.error('Error encountered while saving user data');
+    console.error("Error encountered while saving user data");
   }
 };
 
@@ -35,15 +35,15 @@ export const saveUserData = async (value) => {
  */
 export const getUserData = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem('user_data');
+    const jsonValue = await AsyncStorage.getItem("user_data");
     console.log(
       '~ file: index.js ~ line 39 ~ getUserData ~ jsonValue',
       jsonValue,
     );
-    if (jsonValue === 'null') return jsonValue;
+    if (jsonValue === "null") return jsonValue;
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
-    console.error('Error encountered while reading user data');
+    console.error("Error encountered while reading user data");
   }
 };
 
@@ -53,9 +53,9 @@ export const getUserData = async () => {
  */
 export const eraseUserData = async () => {
   try {
-    await AsyncStorage.setItem('user_data', 'null');
+    await AsyncStorage.setItem("user_data", "null");
   } catch (e) {
-    console.error('Error encountered while saving user data');
+    console.error("Error encountered while saving user data");
   }
 };
 
@@ -68,8 +68,8 @@ export const eraseUserData = async () => {
  */
 function Auth(props) {
   async function getToken(navState) {
-    const url = (await navState.url) + '&'; // Add & to the url so that the last regex doesnt fail
-    console.log('navState => url : ', url);
+    const url = (await navState.url) + "&"; // Add & to the url so that the last regex doesnt fail
+    console.log("navState => url : ", url);
 
     // if added so that expo doesnt generate warning beacause url is null
     if (url) {

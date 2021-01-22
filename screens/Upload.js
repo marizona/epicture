@@ -21,10 +21,12 @@ const Upload = () => {
 
   useEffect(() => {
     (async () => {
-      if (Platform.OS !== 'web') {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
+      if (Platform.OS !== "web") {
+        const {
+          status,
+        } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
         }
       }
     })();
@@ -36,7 +38,7 @@ const Upload = () => {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
-      base64:true,
+      base64: true,
     });
 
     //console.log('result', result);
@@ -52,6 +54,9 @@ const Upload = () => {
       let token = data.acess_token;
       myHeaders.append("Authorization", `Bearer ${token}`);
 
+    var formdata = new FormData();
+    var img = image.uri.split(",");
+    formdata.append("image", img[1]);
 
       var formdata = new FormData();
       
@@ -91,7 +96,7 @@ const Upload = () => {
           </View>
           <View style={styles.screenContainer}>
             {/* ADD BUTTON IMAGE */}
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={pickImage}
               style={styles.addButton}
               >
@@ -129,18 +134,18 @@ const styles = StyleSheet.create({
     width: 60,
     height:40,
     backgroundColor: "red",
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginRight: 10,
     borderRadius: 10,
     marginBottom: 15,
   },
   sendButton: {
     width: 100,
-    height:70,
+    height: 70,
     backgroundColor: "#333C59",
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 10,
 },
    image: {

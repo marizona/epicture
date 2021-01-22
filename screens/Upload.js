@@ -62,22 +62,6 @@ const Upload = () => {
         .catch(error => console.log('error', error));
     };
 
-    if (ImgUpload.status === 200) {
-      Alert.alert(
-        'Great! Your image is uploaded!',
-        [
-          {text: 'Good'}
-        ]
-      );
-    } else {
-      Alert.alert(
-        'Hum... I sense a disturbance',
-        [
-          {text: 'Ok'}
-        ]
-      )
-    }
-
     return (
         <SafeAreaView >
           <View style={styles.image}>

@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
+import { StatusBar } from "expo-status-bar";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,15 +8,14 @@ import {
   Linking,
   SafeAreaView,
   TouchableOpacity,
-} from 'react-native';
-import Auth, { eraseUserData, getUserData } from './screens/Auth';
-import { Root } from 'native-base';
+} from "react-native";
+import Auth, { eraseUserData, getUserData } from "./screens/Auth";
+import { Root } from "native-base";
 import BottomNavigator from "./BottomNavigator";
 import User from "./User.js"
 import Upload from "./screens/Upload";
 import Profile from "./Profile";
-
-
+import SearchingBar from "./screens/SearchingBar/SearchingBar";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -32,7 +31,7 @@ export default function App() {
 
   useEffect(() => {
     getUserData().then((value) => {
-      if (value !== 'null' && value !== null) setAuth();
+      if (value !== "null" && value !== null) setAuth();
     });
   }, []);
 
@@ -46,6 +45,7 @@ export default function App() {
       )}
       {isAuth && (
         <SafeAreaView style={styles.container}>
+        <SearchingBar />
           <StatusBar style="auto" />
           <Profile />
           <TouchableOpacity onPress={() => eraseUserData().then(disconnect())} style={styles.t}>
@@ -55,15 +55,10 @@ export default function App() {
           {showUpload && <Upload />}
           <BottomNavigator setShowUpload={setShowUpload}
             showUpload={showUpload} />
-
-          
         </SafeAreaView>
 
       )}
-
     </Root>
-
-
   );
 }
 
@@ -72,6 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     justifyContent: 'center',
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 
   t: {
@@ -79,5 +75,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
 });

@@ -110,7 +110,7 @@ const Upload = () => {
 
             <View>
             {/* DISPLAY IMAGE UPLOAD */}
-            {image && <Image source={{ uri: image.uri}} style={{ width: 400, height:200, marginBottom: 20 }} /> }
+            {image && <Image source={{ uri: image.uri}} style={{ width: 200, height:100, marginBottom: 20 }} /> }
           </View>
 
             {/* SEND IMAGE */}

@@ -21,6 +21,12 @@ function HomeScreen({ navigation }) {
   const [showUpload, setShowUpload] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
+      <TouchableOpacity 
+        onPress={() => navigation.openDrawer()}
+        style={{ flexDirection:'row-reverse'}}
+        >
+        <Text>Menu</Text>
+      </TouchableOpacity>
       <View style={styles.container}>
         <SearchingBar />
       </View>
@@ -38,23 +44,37 @@ function UploadScreen({navigation}) {
       <Upload />
     </View>
   )
-  
 }
 
 function ProfileScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Page</Text>
-      <User />
+    <View style={styles.container}>
+      <TouchableOpacity 
+        onPress={() => navigation.openDrawer()}
+        style={{ flexDirection:'row-reverse'}}
+        >
+        <Text>Menu</Text>
+      </TouchableOpacity>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Profile Page</Text>
+        <User />
+      </View>
     </View>
   );
 }
 
 function FavoriteScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={styles.container}>
+      <TouchableOpacity 
+        onPress={() => navigation.openDrawer()}
+        style={{ flexDirection:'row-reverse'}}
+        >
+        <Text>Menu</Text>
+      </TouchableOpacity>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Favorite Page</Text>
-      <Button onPress={() => navigation.openDrawer()} title="Nav" />
+      </View>
     </View>
   );
 }

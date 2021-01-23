@@ -45,13 +45,13 @@ export default function App() {
       )}
       {isAuth && (
         <SafeAreaView style={styles.container}>
-        <SearchingBar />
           <StatusBar style="auto" />
           <Profile />
           <TouchableOpacity onPress={() => eraseUserData().then(disconnect())} style={styles.t}>
             <Text >Logout</Text>
           </TouchableOpacity>
           <User />
+          <SearchingBar />
           {showUpload && <Upload />}
           <BottomNavigator setShowUpload={setShowUpload}
             showUpload={showUpload} />

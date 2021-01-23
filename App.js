@@ -64,7 +64,7 @@ export default function App() {
             <Text >Logout</Text>
           </TouchableOpacity>
           <Navbar />
-          <SearchingBar />
+          {/* <SearchingBar /> */}
 
           {/* <StatusBar style="auto" />
           {showUpload && <Upload />}

@@ -36,13 +36,13 @@ const User = () => {
 
   return (
     <SafeAreaView>
-      <Text>{username}</Text>
       <Image
         source={{
           uri: imagePath,
         }}
         style={{ height: 60, width: 60, borderRadius: 30 }}
       />
+      <Text>{username}</Text>
     </SafeAreaView>
   );
 };

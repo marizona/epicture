@@ -14,12 +14,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import User from '../User';
 import BottomNavigator from "../BottomNavigator";
 import Upload from "./Upload";
+import SearchingBar from "./SearchingBar/SearchingBar";
+
 
 
 function HomeScreen({ navigation }) {
   const [showUpload, setShowUpload] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
+      <SearchingBar />
       <StatusBar style="auto" />
           {showUpload && <Upload />}
           <BottomNavigator setShowUpload={setShowUpload}

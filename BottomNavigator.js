@@ -12,8 +12,6 @@ class BottomNavigator extends Component {
             <View style={{
                 flex: 1,
                 flexDirection: 'column',
-                
-
             }}>
                 
                 <View style={{

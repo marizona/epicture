@@ -13,7 +13,8 @@ import Auth, { eraseUserData, getUserData } from "./screens/Auth";
 import { Root } from "native-base";
 import BottomNavigator from "./BottomNavigator";
 import User from "./User.js"
-import Upload from "./screens/Upload"
+import Upload from "./screens/Upload";
+import Profile from "./Profile";
 import SearchingBar from "./screens/SearchingBar/SearchingBar";
 
 export default function App() {
@@ -44,19 +45,16 @@ export default function App() {
       )}
       {isAuth && (
         <SafeAreaView style={styles.container}>
-          <TouchableOpacity
-            onPress={() => eraseUserData().then(disconnect())}
-            style={styles.t}
-          >
-            <Text>Logout</Text>
-          </TouchableOpacity>
-          <SearchingBar />
+        <SearchingBar />
           <StatusBar style="auto" />
+          <Profile />
+          <TouchableOpacity onPress={() => eraseUserData().then(disconnect())} style={styles.t}>
+            <Text >Logout</Text>
+          </TouchableOpacity>
+          <User />
           {showUpload && <Upload />}
           <BottomNavigator setShowUpload={setShowUpload}
             showUpload={showUpload} />
-
-          <User />
         </SafeAreaView>
 
       )}

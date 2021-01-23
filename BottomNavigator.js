@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Icon } from 'react-native-elements'
 import Upload from './screens/Upload';
+import User from "./User";
+
 
 class BottomNavigator extends Component {
     render() {
@@ -13,6 +15,7 @@ class BottomNavigator extends Component {
                 
 
             }}>
+                
                 <View style={{
                     position: 'absolute',
                     alignSelf: 'center',
@@ -21,17 +24,23 @@ class BottomNavigator extends Component {
                     height: 70,
                     borderRadius: 35,
                     bottom: 25,
-                    zIndex: 10
+                    zIndex: 10,
+                    flexDirection: 'row',
                 }}>
-                    <Icon
-                        name='add'
-                        type='material'
-                        color='#51a0d5'
-                        containerStyle={{ alignSelf: 'center' }}
-                        reverse
-                        size={28}
-                        onPress={()=> setShowUpload(!ShowUpload)}
-                    />
+                    <View style={{ marginRight: 40,}}>
+                        <Icon
+                            name='add'
+                            type='material'
+                            color='#51a0d5'
+                            containerStyle={{ alignSelf: 'center' }}
+                            reverse
+                            size={28}
+                            onPress={()=> setShowUpload(!ShowUpload)}
+                        />
+                    </View>
+                    <View style={{marginTop: 5 }}>
+                        <User />
+                    </View>
                 </View>
                 <View style={{
                     position: 'absolute',

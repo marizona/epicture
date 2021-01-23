@@ -8,12 +8,16 @@ import {
   Linking,
   SafeAreaView,
   TouchableOpacity,
-} from "react-native";
-import Auth, { eraseUserData, getUserData } from "./screens/Auth";
-import { Root } from "native-base";
+} from 'react-native';
+import Auth, { eraseUserData, getUserData } from './screens/Auth';
+import { Root } from 'native-base';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import BottomNavigator from "./BottomNavigator";
-import User from "./User.js"
+import User from "./User.js";
 import Upload from "./screens/Upload";
+import Navbar from './screens/Navbar';
 import Profile from "./Profile";
 import SearchingBar from "./screens/SearchingBar/SearchingBar";
 
@@ -34,6 +38,16 @@ export default function App() {
       if (value !== "null" && value !== null) setAuth();
     });
   }, []);
+  
+  function UploadScreen() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+         <StatusBar style="auto" />
+          <Upload />
+      </View>
+    );
+  }
+
 
   return (
     <Root>
@@ -45,16 +59,19 @@ export default function App() {
       )}
       {isAuth && (
         <SafeAreaView style={styles.container}>
-          <StatusBar style="auto" />
-          <Profile />
+
           <TouchableOpacity onPress={() => eraseUserData().then(disconnect())} style={styles.t}>
             <Text >Logout</Text>
           </TouchableOpacity>
-          <User />
+          <Navbar />
           <SearchingBar />
+
+          {/* <StatusBar style="auto" />
           {showUpload && <Upload />}
           <BottomNavigator setShowUpload={setShowUpload}
-            showUpload={showUpload} />
+            showUpload={showUpload} /> 
+            
+           <User /> */}
         </SafeAreaView>
 
       )}

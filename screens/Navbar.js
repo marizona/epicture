@@ -17,12 +17,13 @@ import Upload from "./Upload";
 import SearchingBar from "./SearchingBar/SearchingBar";
 
 
-
 function HomeScreen({ navigation }) {
   const [showUpload, setShowUpload] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
-      <SearchingBar />
+      <View style={styles.container}>
+        <SearchingBar />
+      </View>
       <StatusBar style="auto" />
           {showUpload && <Upload />}
           <BottomNavigator setShowUpload={setShowUpload}

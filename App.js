@@ -8,6 +8,7 @@ import {
   Linking,
   SafeAreaView,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import Auth, { eraseUserData, getUserData } from './screens/Auth';
 import { Root } from 'native-base';
@@ -20,6 +21,7 @@ import Upload from "./screens/Upload";
 import Navbar from './screens/Navbar';
 import Profile from "./Profile";
 import SearchingBar from "./screens/SearchingBar/SearchingBar";
+import WelcomeScreen from "./screens/WelcomeScreen";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -39,22 +41,48 @@ export default function App() {
     });
   }, []);
   
-  function UploadScreen() {
+  function WelcomeScreen({ navigation }) {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-         <StatusBar style="auto" />
-          <Upload />
-      </View>
+      <ImageBackground
+       style={styles.background}
+       source={require('./assets/welcome.png')}
+       >
+           <TouchableOpacity 
+           style={styles.loginButton}
+           onPress={() => navigation.navigate('Authentification')}
+           >
+               <Text>Login</Text>
+            </TouchableOpacity>
+       </ImageBackground>
     );
   }
 
+  function AuthScreen() {
+    return (
+      <Root>
+        {!isAuth && (
+         <Auth setAuth={setAuth} />
+        )}
+      </Root>
+    );
+  }
 
+  const Stack = createStackNavigator();
   return (
     <Root>
       {!isAuth && (
         <>
-          <Text>Not Connected</Text>
-          <Auth setAuth={setAuth} />
+          {/* <Text>Not Connected</Text> */}
+          {/* <WelcomeScreen /> */}
+          {/* <Auth setAuth={setAuth} /> */}
+          <NavigationContainer>
+            <Stack.Navigator 
+              initialRouteName="Welcome"
+              screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="Welcome" component={WelcomeScreen} />
+              <Stack.Screen name="Authentification" component={AuthScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
         </>
       )}
       {isAuth && (
@@ -93,4 +121,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  loginButton: {
+    width: '80%',
+    marginBottom: 20,
+    height:70,
+    backgroundColor: "#45FA40",
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+},
+  background: {
+    flex:1,
+    justifyContent:"flex-end",
+    alignItems: "center",
+},
 });

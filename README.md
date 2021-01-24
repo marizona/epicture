@@ -47,7 +47,7 @@ cd C-COD-290-PAR-2-1-epicture-bleine.dhellot
 ```bash
 npm install # For npm
 
-yarn install # Form npm
+yarn install # Form yarn
 ```
 
 - Running the app

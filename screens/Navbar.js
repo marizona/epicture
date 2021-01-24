@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { StyleSheet,
-          StatusBar,
-          Button, 
-          Text, 
-          View,
-          TouchableOpacity,
-          SafeAreaView,
+import {
+  StyleSheet,
+  StatusBar,
+  Button,
+  Text,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
@@ -15,30 +16,33 @@ import User from '../User';
 import BottomNavigator from "../BottomNavigator";
 import Upload from "./Upload";
 import SearchingBar from "./SearchingBar/SearchingBar";
+import Profile from "../Profile"
+import { FontAwesome5 } from '@expo/vector-icons';
 
 
 function HomeScreen({ navigation }) {
   const [showUpload, setShowUpload] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={() => navigation.openDrawer()}
-        style={{ flexDirection:'row-reverse'}}
-        >
-        <Text>Menu</Text>
+        style={{ flexDirection: 'row', alignItems: 'center', padding: 9 }}
+      >
+        <User />
+        <FontAwesome5 name='hamburger' color='#51a0d5' size={30} style={{ marginRight: 5 }} />
       </TouchableOpacity>
       <View style={styles.container}>
         <SearchingBar />
       </View>
       <StatusBar style="auto" />
-          {showUpload && <Upload />}
-          <BottomNavigator setShowUpload={setShowUpload}
-            showUpload={showUpload} /> 
+      {showUpload && <Upload />}
+      <BottomNavigator setShowUpload={setShowUpload}
+        showUpload={showUpload} />
     </SafeAreaView>
   );
 }
 
-function UploadScreen({navigation}) {
+function UploadScreen({ navigation }) {
   return (
     <View>
       <Upload />
@@ -49,15 +53,14 @@ function UploadScreen({navigation}) {
 function ProfileScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={() => navigation.openDrawer()}
-        style={{ flexDirection:'row-reverse'}}
-        >
+        style={{ flexDirection: 'row-reverse' }}
+      >
         <Text>Menu</Text>
       </TouchableOpacity>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Profile Page</Text>
-        <User />
+      <View style={{ flex: 1, }}>
+        <Profile />
       </View>
     </View>
   );
@@ -66,14 +69,15 @@ function ProfileScreen({ navigation }) {
 function FavoriteScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={() => navigation.openDrawer()}
-        style={{ flexDirection:'row-reverse'}}
-        >
+        style={{ flexDirection: 'rows' }}
+      >
+        <User />
         <Text>Menu</Text>
       </TouchableOpacity>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Favorite Page</Text>
+        <Text>Favorite Page</Text>
       </View>
     </View>
   );
@@ -98,7 +102,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     justifyContent: 'center',
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+
   },
 
   t: {

@@ -36,10 +36,10 @@ class BottomNavigator extends Component {
                             onPress={()=> setShowUpload(!ShowUpload)}
                         />
                     </View>
-                    <View style={{marginTop: 5 }}>
+            {/* <View style={{marginTop: 5 }}>
                         <User />
-                    </View>
-                </View>
+                    </View>  */}
+                </View> 
                 <View style={{
                     position: 'absolute',
                     backgroundColor: 'lightgrey',

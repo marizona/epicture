@@ -7,9 +7,11 @@ import {
   FlatList,
   ActivityIndicator,
   Platform,
+  ScrollView
 } from "react-native";
 import { SearchBar } from "react-native-elements";
 import axios from "axios";
+// import { ScrollView } from "react-native-gesture-handler";
 
 export const CLIENT_ID = "652b64e9aa10780";
 
@@ -115,29 +117,32 @@ export default class SearchingBar extends React.Component {
       <View style={styles.viewStyle}>
         <SearchBar
           round
-          searchIcon={{ size: 24 }}
+          searchIcon={{ size: 30 }}
           onChangeText={(text) => this.SearchFilterFunction(text)}
           onClear={(text) => this.SearchFilterFunction("")}
           placeholder="Search"
           value={this.state.search}
         />
-        <FlatList
-          data={this.state.dataSource}
-          ItemSeparatorComponent={this.ListViewItemSeparator}
-          renderItem={({ item }) => {
-            const links = this.getLinks(item);
-            return links.map((event) => {
-              if (event !== undefined) {
-                return (
-                  <Image style={styles.tinyLogo} source={{ uri: event }} />
-                );
-              }
-            });
-          }}
-          enableEmptySections={true}
-          style={{ marginTop: 10 }}
-          keyExtractor={(item, index) => index.toString()}
-        />
+        <ScrollView style={{ flex: 1,height:80}}> 
+          <FlatList
+            contentContainerStyle={{ alignItems: 'center', padding: 20 }}
+            data={this.state.dataSource}
+            ItemSeparatorComponent={this.ListViewItemSeparator}
+            renderItem={({ item }) => {
+              const links = this.getLinks(item);
+              return links.map((event) => {
+                if (event !== undefined) {
+                  return (<View style={{ flex: 1 }}>
+                    <Image style={styles.tinyLogo} source={{ uri: event }} /></View>
+                  );
+                }
+              });
+            }}
+            enableEmptySections={true}
+            style={{ marginTop: 10 }}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </ScrollView> 
       </View>
     );
   }
@@ -149,18 +154,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
     marginTop: 100,
-    marginTop: Platform.OS == "ios" ? 40 : 0,
+     marginTop: Platform.OS == "ios" ? 40 : 0,
   },
   tinyLogo: {
     flex: 1,
     justifyContent: "space-around",
-    width: 100,
-    height: 100,
+    width: 150,
+    height: 150,
     // width: "95%",
     // height: 300,
     margin: 10,
-    marginRight: 30,
-    marginBottom: 60,
+
   },
   textStyle: {
     padding: 20,

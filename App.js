@@ -72,6 +72,7 @@ export default function App() {
             showUpload={showUpload} /> 
             
            <User /> */}
+           <Profile/>
         </SafeAreaView>
 
       )}

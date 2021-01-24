@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import * as React from "react";
+import { useState, useEffect } from "react";
 import {
   StyleSheet,
   StatusBar,
@@ -8,17 +8,16 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
-} from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import User from '../User';
+} from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import User from "../User";
 import BottomNavigator from "../BottomNavigator";
 import Upload from "./Upload";
 import SearchingBar from "./SearchingBar/SearchingBar";
 import Profile from "../Profile"
 import { Feather } from '@expo/vector-icons'; 
-
 
 function HomeScreen({ navigation }) {
   const [showUpload, setShowUpload] = useState(false);
@@ -27,7 +26,7 @@ function HomeScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
         onPress={() => navigation.openDrawer()}
-        style={{ flexDirection: 'row', alignItems: 'center', padding: 9 }}
+        style={{ flexDirection: "row", alignItems: "center", padding: 9 }}
       >
         <User />
         <Feather name="menu" size={30} color="black" />
@@ -37,9 +36,8 @@ function HomeScreen({ navigation }) {
       </View>
       <StatusBar style="auto" />
       {showUpload && <Upload />}
-      <BottomNavigator setShowUpload={setShowUpload}
-        showUpload={showUpload} />
-        
+        <BottomNavigator setShowUpload={setShowUpload} showUpload={showUpload} />
+
     </SafeAreaView>
     
   );
@@ -50,7 +48,7 @@ function UploadScreen({ navigation }) {
     <View>
       <Upload />
     </View>
-  )
+  );
 }
 
 function ProfileScreen({ navigation }) {
@@ -58,11 +56,11 @@ function ProfileScreen({ navigation }) {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => navigation.openDrawer()}
-        style={{ flexDirection: 'row-reverse' }}
+        style={{ flexDirection: "row-reverse" }}
       >
         <Feather name="menu" size={24} color="black" />
       </TouchableOpacity>
-      <View style={{ flex: 1, }}>
+      <View style={{ flex: 1 }}>
         <Profile />
       </View>
     </View>
@@ -74,12 +72,12 @@ function FavoriteScreen({ navigation }) {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => navigation.openDrawer()}
-        style={{ flexDirection: 'rows' }}
+        style={{ flexDirection: "rows" }}
       >
         <User />
         <Text>Menu</Text>
       </TouchableOpacity>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>Favorite Page</Text>
       </View>
     </View>
@@ -111,9 +109,7 @@ const styles = StyleSheet.create({
   },
 
   t: {
-
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
-
 });

@@ -40,9 +40,9 @@ const User = () => {
         source={{
           uri: imagePath,
         }}
-        style={{ height: 30, width: 30, borderRadius: 15, }}
+        style={{ height: 55, width: 55, borderRadius: 15, }}
       />
-      <Text style={{ marginLeft: 5, textAlign: 'center' }}>{username}</Text>
+      <Text style={{ marginLeft: 10, textAlign: 'center', marginTop: 18, fontSize:18}}>{username}</Text>
     </SafeAreaView>
   );
 };

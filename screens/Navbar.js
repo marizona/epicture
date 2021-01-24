@@ -16,32 +16,30 @@ import User from "../User";
 import BottomNavigator from "../BottomNavigator";
 import Upload from "./Upload";
 import SearchingBar from "./SearchingBar/SearchingBar";
-import Profile from "../Profile";
-import { FontAwesome5 } from "@expo/vector-icons";
+import Profile from "../Profile"
+import { Feather } from '@expo/vector-icons'; 
 
 function HomeScreen({ navigation }) {
   const [showUpload, setShowUpload] = useState(false);
   return (
+    
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
         onPress={() => navigation.openDrawer()}
         style={{ flexDirection: "row", alignItems: "center", padding: 9 }}
       >
         <User />
-        <FontAwesome5
-          name="hamburger"
-          color="#51a0d5"
-          size={30}
-          style={{ marginRight: 5 }}
-        />
+        <Feather name="menu" size={30} color="black" />
       </TouchableOpacity>
       <View style={styles.container}>
         <SearchingBar />
       </View>
       <StatusBar style="auto" />
       {showUpload && <Upload />}
-      <BottomNavigator setShowUpload={setShowUpload} showUpload={showUpload} />
+        <BottomNavigator setShowUpload={setShowUpload} showUpload={showUpload} />
+
     </SafeAreaView>
+    
   );
 }
 
@@ -60,7 +58,7 @@ function ProfileScreen({ navigation }) {
         onPress={() => navigation.openDrawer()}
         style={{ flexDirection: "row-reverse" }}
       >
-        <Text>Menu</Text>
+        <Feather name="menu" size={24} color="black" />
       </TouchableOpacity>
       <View style={{ flex: 1 }}>
         <Profile />
@@ -98,14 +96,16 @@ export default function Navbar() {
         {/* <Drawer.Screen name="Upload" component={UploadScreen} /> */}
       </Drawer.Navigator>
     </NavigationContainer>
+    
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
-    justifyContent: "center",
-    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    //paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+
   },
 
   t: {

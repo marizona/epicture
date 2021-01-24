@@ -16,7 +16,7 @@ const Profile = () => {
 
   const RenderImage = ({ item }) => {
     return (<View style={{ flex: 1, alignItems:'center', marginTop:5}} key={item}>
-      <Image style={styles.profileImage} source={item.image} />
+      <Image style={styles.pImage} source={item.image} />
     </View>)
   }
 
@@ -103,10 +103,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 300,
   },
+  pImage: {
+    width: 300,
+    height: 300,
+    marginBottom: 20,
+    
+  },
   name: {
     fontSize: 25,
     marginBottom: 20,
-    color: '#1E90FF',
+    color: '#1cb36c',
   },
 
 

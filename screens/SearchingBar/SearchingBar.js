@@ -106,7 +106,16 @@ export default class SearchingBar extends React.Component {
     }
     return (
       <View style={styles.viewStyle}>
-        <SearchBar
+        <SearchBar 
+           containerStyle={{backgroundColor: 'white', size:56}}
+           iconStyle={{backgroundColor:'#fff'}}
+           leftIconContainerStyle={{backgroundColor: 'lightgrey'}}
+           inputContainerStyle={{backgroundColor: 'lightgrey'}}
+           containerStyle={{
+            backgroundColor: 'transparent',
+            borderBottomColor: 'transparent',
+            borderTopColor: 'transparent',
+            }}
           round
           searchIcon={{ size: 30 }}
           onChangeText={this.updateSearch}
@@ -115,7 +124,7 @@ export default class SearchingBar extends React.Component {
         />
         <ScrollView style={{ flex: 1, height: 80 }}>
           <FlatList
-            contentContainerStyle={{ alignItems: "center", padding: 20 }}
+            contentContainerStyle={{ alignItems: 'center', padding: 20}}
             data={this.state.dataSource}
             ItemSeparatorComponent={this.ListViewItemSeparator}
             renderItem={({ item }) => {
@@ -155,8 +164,8 @@ const styles = StyleSheet.create({
   tinyLogo: {
     flex: 1,
     justifyContent: "space-around",
-    width: 150,
-    height: 150,
+    width: 300,
+    height: 300,
     // width: "95%",
     // height: 300,
     margin: 10,
@@ -164,4 +173,5 @@ const styles = StyleSheet.create({
   textStyle: {
     padding: 20,
   },
+
 });

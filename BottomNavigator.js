@@ -9,15 +9,14 @@ class BottomNavigator extends Component {
     render() {
         const {ShowUpload, setShowUpload}=this.props;
         return (
-            <View style={{
-                flex: 1,
+            <View style={{ 
                 flexDirection: 'column',
             }}>
                 
                 <View style={{
                     position: 'absolute',
                     alignSelf: 'center',
-                    backgroundColor: '#f8f4f4',
+                    
                     width: 70,
                     height: 70,
                     borderRadius: 35,
@@ -29,7 +28,7 @@ class BottomNavigator extends Component {
                         <Icon
                             name='add'
                             type='material'
-                            color='#51a0d5'
+                            color='#1cb36c'
                             containerStyle={{ alignSelf: 'center' }}
                             reverse
                             size={28}

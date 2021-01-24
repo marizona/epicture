@@ -110,7 +110,7 @@ const Upload = () => {
 
             <View>
             {/* DISPLAY IMAGE UPLOAD */}
-            {image && <Image source={{ uri: image.uri}} style={{ width: 200, height:100, marginBottom: 20 }} /> }
+            {image && <Image source={{ uri: image.uri}} style={{ width: 200, height:100}} /> }
           </View>
 
             {/* SEND IMAGE */}
@@ -129,7 +129,7 @@ const Upload = () => {
 
 const styles = StyleSheet.create({
   screenContainer: {
-    marginTop:100,
+    marginTop:66,
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
@@ -147,11 +147,11 @@ const styles = StyleSheet.create({
   sendButton: {
     width: 100,
     height: 50,
-    backgroundColor: "#333C59",
+    backgroundColor: "#1cb36c",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
-    marginBottom:60
+    marginBottom:100
 },
    image: {
     justifyContent: 'center',

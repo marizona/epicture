@@ -10,12 +10,12 @@ const Profile = () => {
   const [UserData, setUserData] = useState(null);
 
   // setUserData([])
-  const imagedata = [{ key: 0, image: { uri: "https://bootdey.com/img/Content/avatar/avatar6.png" } },
-  { key: 1, image: { uri: "https://bootdey.com/img/Content/avatar/avatar6.png" } },
-  { key: 2, image: { uri: "https://bootdey.com/img/Content/avatar/avatar6.png" } }];
+  const imagedata = [{ key: 0, image: { uri: "https://picsum.photos/200" } },
+  { key: 1, image: { uri: "https://picsum.photos/200" } },
+  { key: 2, image: { uri: "https://picsum.photos/200" } }];
 
   const RenderImage = ({ item }) => {
-    return (<View style={{ flex: 1 }} key={item}>
+    return (<View style={{ flex: 1, alignItems:'center', marginTop:5}} key={item}>
       <Image style={styles.profileImage} source={item.image} />
     </View>)
   }

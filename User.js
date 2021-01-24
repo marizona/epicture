@@ -35,14 +35,14 @@ const User = () => {
   getUserData();
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, marginLeft: 5, flexDirection: 'row' }}>
       <Image
         source={{
           uri: imagePath,
         }}
-        style={{ height: 60, width: 60, borderRadius: 30 }}
+        style={{ height: 30, width: 30, borderRadius: 15, }}
       />
-      <Text>{username}</Text>
+      <Text style={{ marginLeft: 5, textAlign: 'center' }}>{username}</Text>
     </SafeAreaView>
   );
 };

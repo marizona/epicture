@@ -85,14 +85,14 @@ const Upload = () => {
     return (
         <SafeAreaView >
           <View style={styles.image}>
-          <Text style={{ marginBottom: 20, fontSize: 20, fontWeight: "bold" }}>Post your image</Text>
+          <Text style={{ marginBottom: 30, fontSize: 20, fontWeight: "bold" }}>Post your image</Text>
           <TextInput
-              style={{ height: 40, width: 200, borderColor: 'gray', borderWidth: 1, marginBottom: 20, borderRadius: 10, textAlign : "center"  }}
+              style={{ height: 40, width: 200, borderColor: 'gray', borderWidth: 1, marginBottom: 30, borderRadius: 10, textAlign : "center"  }}
               onChangeText={text => setTitle(text)}
               value={title}
             />
             <TextInput
-              style={{ height: 100, width: 200, borderColor: 'gray', borderWidth: 1, borderRadius: 10, textAlign : "center" }}
+              style={{ height: 100, width: 200, borderColor: 'gray', marginBottom:30,borderWidth: 1, borderRadius: 10, textAlign : "center" }}
               onChangeText={text => setContent(text)}
               value={description}
             />
@@ -129,6 +129,7 @@ const Upload = () => {
 
 const styles = StyleSheet.create({
   screenContainer: {
+    marginTop:100,
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
@@ -136,20 +137,21 @@ const styles = StyleSheet.create({
   addButton: {
     width: 60,
     height:40,
-    backgroundColor: "red",
+    backgroundColor: "#51a0d5",
     alignItems: "center",
     justifyContent: "center",
     marginRight: 10,
     borderRadius: 10,
-    marginBottom: 15,
+    marginBottom: 20,
   },
   sendButton: {
     width: 100,
-    height: 70,
+    height: 50,
     backgroundColor: "#333C59",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
+    marginBottom:60
 },
    image: {
     justifyContent: 'center',

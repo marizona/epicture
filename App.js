@@ -40,6 +40,15 @@ export default function App() {
       if (value !== "null" && value !== null) setAuth();
     });
   }, []);
+
+
+  function UploadScreen() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <StatusBar style="auto" />
+        <Upload />
+      </View>
+
   
   function WelcomeScreen({ navigation }) {
     return (
@@ -54,6 +63,7 @@ export default function App() {
                <Text>Login</Text>
             </TouchableOpacity>
        </ImageBackground>
+
     );
   }
 
@@ -88,7 +98,7 @@ export default function App() {
       {isAuth && (
         <SafeAreaView style={styles.container}>
 
-          <TouchableOpacity onPress={() => eraseUserData().then(disconnect())} style={styles.t}>
+<TouchableOpacity onPress={() => eraseUserData().then(disconnect())} style={styles.t}>
             <Text >Logout</Text>
           </TouchableOpacity>
           <Navbar />
@@ -100,7 +110,7 @@ export default function App() {
             showUpload={showUpload} /> 
             
            <User /> */}
-           <Profile/>
+          {/* <Profile/> */}
         </SafeAreaView>
 
       )}
@@ -119,7 +129,7 @@ const styles = StyleSheet.create({
   t: {
 
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center', 
   },
 
   loginButton: {

@@ -1,6 +1,5 @@
 import * as React from "react";
 import {
-  Text,
   Image,
   View,
   StyleSheet,
@@ -11,7 +10,6 @@ import {
 } from "react-native";
 import { SearchBar } from "react-native-elements";
 import axios from "axios";
-// import { ScrollView } from "react-native-gesture-handler";
 
 export const CLIENT_ID = "652b64e9aa10780";
 
@@ -61,7 +59,7 @@ export default class SearchingBar extends React.Component {
     if (item.data.items === undefined) {
       return [];
     }
-    const links = item.data.items.slice(0, 20).map((event) => {
+    const links = item.data.items.slice(0, 40).map((event) => {
       if (event.images !== undefined) {
         return event.images.map((e) => {
           if (e.link.match(pattern)[0] !== ".mp4") {
@@ -149,7 +147,7 @@ export default class SearchingBar extends React.Component {
                       <Image
                         style={styles.tinyLogo}
                         source={{ uri: event }}
-                        key={Math.floor(Math.random() * 100000)}
+                        key={Math.floor(Math.random() * 1000000)}
                       />
                     </View>
                   );
@@ -179,11 +177,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: 300,
     height: 300,
-    // width: "95%",
-    // height: 300,
     margin: 10,
-  },
-  textStyle: {
-    padding: 20,
   },
 });

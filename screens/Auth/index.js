@@ -37,8 +37,8 @@ export const getUserData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem("user_data");
     console.log(
-      '~ file: index.js ~ line 39 ~ getUserData ~ jsonValue',
-      jsonValue,
+      "~ file: index.js ~ line 39 ~ getUserData ~ jsonValue",
+      jsonValue
     );
     if (jsonValue === "null") return jsonValue;
     return jsonValue != null ? JSON.parse(jsonValue) : null;
@@ -87,10 +87,7 @@ function Auth(props) {
         id: id_re.exec(url)[1],
         date: new Date().toJSON(),
       };
-      console.log(
-        '~ file: index.js ~ line 94 ~ getToken ~ userData',
-        userData,
-      );
+      console.log("~ file: index.js ~ line 94 ~ getToken ~ userData", userData);
 
       saveUserData(userData).then((value) => props.setAuth());
     }

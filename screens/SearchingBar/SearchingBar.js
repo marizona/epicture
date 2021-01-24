@@ -88,12 +88,25 @@ export default class SearchingBar extends React.Component {
 
   updateSearch = (search) => {
     if (search === "") {
-      this.setState({ ...this.state, dataSource: [response.data] });
+      this.delay(() => {
+        this.setState({
+          ...this.state,
+          dataSource: [response.data],
+        });
+      }, 2000);
     } else {
       this.setState({ search }, () => {
         this.fetchData(search);
       });
     }
+  };
+
+  delay = () => {
+    let timer = 0;
+    return function (callback, ms) {
+      clearTimeout(timer);
+      timer = setTimeout(callback, ms);
+    };
   };
 
   render() {
@@ -106,16 +119,16 @@ export default class SearchingBar extends React.Component {
     }
     return (
       <View style={styles.viewStyle}>
-        <SearchBar 
-           containerStyle={{backgroundColor: 'white', size:56}}
-           iconStyle={{backgroundColor:'#fff'}}
-           leftIconContainerStyle={{backgroundColor: 'lightgrey'}}
-           inputContainerStyle={{backgroundColor: 'lightgrey'}}
-           containerStyle={{
-            backgroundColor: 'transparent',
-            borderBottomColor: 'transparent',
-            borderTopColor: 'transparent',
-            }}
+        <SearchBar
+          containerStyle={{ backgroundColor: "white", size: 56 }}
+          iconStyle={{ backgroundColor: "#fff" }}
+          leftIconContainerStyle={{ backgroundColor: "lightgrey" }}
+          inputContainerStyle={{ backgroundColor: "lightgrey" }}
+          containerStyle={{
+            backgroundColor: "transparent",
+            borderBottomColor: "transparent",
+            borderTopColor: "transparent",
+          }}
           round
           searchIcon={{ size: 30 }}
           onChangeText={this.updateSearch}
@@ -124,7 +137,7 @@ export default class SearchingBar extends React.Component {
         />
         <ScrollView style={{ flex: 1, height: 80 }}>
           <FlatList
-            contentContainerStyle={{ alignItems: 'center', padding: 20}}
+            contentContainerStyle={{ alignItems: "center", padding: 20 }}
             data={this.state.dataSource}
             ItemSeparatorComponent={this.ListViewItemSeparator}
             renderItem={({ item }) => {
@@ -173,5 +186,4 @@ const styles = StyleSheet.create({
   textStyle: {
     padding: 20,
   },
-
 });

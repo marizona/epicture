@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import * as React from "react";
+import { useState, useEffect } from "react";
 import {
   StyleSheet,
   StatusBar,
@@ -8,17 +8,16 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
-} from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import User from '../User';
+} from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import User from "../User";
 import BottomNavigator from "../BottomNavigator";
 import Upload from "./Upload";
 import SearchingBar from "./SearchingBar/SearchingBar";
-import Profile from "../Profile"
-import { FontAwesome5 } from '@expo/vector-icons';
-
+import Profile from "../Profile";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 function HomeScreen({ navigation }) {
   const [showUpload, setShowUpload] = useState(false);
@@ -26,18 +25,22 @@ function HomeScreen({ navigation }) {
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
         onPress={() => navigation.openDrawer()}
-        style={{ flexDirection: 'row', alignItems: 'center', padding: 9 }}
+        style={{ flexDirection: "row", alignItems: "center", padding: 9 }}
       >
         <User />
-        <FontAwesome5 name='hamburger' color='#51a0d5' size={30} style={{ marginRight: 5 }} />
+        <FontAwesome5
+          name="hamburger"
+          color="#51a0d5"
+          size={30}
+          style={{ marginRight: 5 }}
+        />
       </TouchableOpacity>
       <View style={styles.container}>
         <SearchingBar />
       </View>
       <StatusBar style="auto" />
       {showUpload && <Upload />}
-      <BottomNavigator setShowUpload={setShowUpload}
-        showUpload={showUpload} />
+      <BottomNavigator setShowUpload={setShowUpload} showUpload={showUpload} />
     </SafeAreaView>
   );
 }
@@ -47,7 +50,7 @@ function UploadScreen({ navigation }) {
     <View>
       <Upload />
     </View>
-  )
+  );
 }
 
 function ProfileScreen({ navigation }) {
@@ -55,11 +58,11 @@ function ProfileScreen({ navigation }) {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => navigation.openDrawer()}
-        style={{ flexDirection: 'row-reverse' }}
+        style={{ flexDirection: "row-reverse" }}
       >
         <Text>Menu</Text>
       </TouchableOpacity>
-      <View style={{ flex: 1, }}>
+      <View style={{ flex: 1 }}>
         <Profile />
       </View>
     </View>
@@ -71,12 +74,12 @@ function FavoriteScreen({ navigation }) {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => navigation.openDrawer()}
-        style={{ flexDirection: 'rows' }}
+        style={{ flexDirection: "rows" }}
       >
         <User />
         <Text>Menu</Text>
       </TouchableOpacity>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>Favorite Page</Text>
       </View>
     </View>
@@ -100,16 +103,13 @@ export default function Navbar() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    justifyContent: 'center',
+    backgroundColor: "white",
+    justifyContent: "center",
     // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-
   },
 
   t: {
-
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
-
 });

@@ -7,7 +7,7 @@ import {
   FlatList,
   ActivityIndicator,
   Platform,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { SearchBar } from "react-native-elements";
 import axios from "axios";
@@ -25,10 +25,10 @@ export default class SearchingBar extends React.Component {
     this.arrayHolder = [];
   }
 
-  componentDidMount() {
+  fetchData = (galleryText) => {
     axios
       .get(
-        "https://api.imgur.com/3/gallery/t/cat/%7Bsort%7D/%7Bwindow%7D/%7Bpage%7D",
+        `https://api.imgur.com/3/gallery/t/${galleryText}/%7Bsort%7D/%7Bwindow%7D/%7Bpage%7D`,
         {
           headers: {
             Authorization: `Client-ID ${CLIENT_ID}`,
@@ -38,6 +38,7 @@ export default class SearchingBar extends React.Component {
       .then((response) => {
         this.setState(
           {
+            ...this.state,
             isLoading: false,
             dataSource: [response.data],
           },
@@ -49,38 +50,18 @@ export default class SearchingBar extends React.Component {
       .catch((error) => {
         console.error(error);
       });
-  }
-
-  SearchFilterFunction(text) {
-    const newData = this.arrayHolder.filter((item) => {
-      const itemData = item.data.items.title // ============================ UPDATE : map ?
-        ? item.data.items.title.toUpperCase()
-        : "".toUpperCase();
-      const textData = text.toUpperCase();
-      return itemData.indexOf(textData) > -1;
-    });
-
-    this.setState({
-      dataSource: newData,
-      search: text,
-    });
-  }
-
-  ListViewItemSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 0,
-          width: "90%",
-          backgroundColor: "#080808",
-        }}
-      />
-    );
   };
+
+  componentDidMount() {
+    this.fetchData("cat");
+  }
 
   getLinks = (item) => {
     const pattern = /\.[0-9a-z]+$/i;
-    const links = item.data.items.slice(0, 30).map((event) => {
+    if (item.data.items === undefined) {
+      return [];
+    }
+    const links = item.data.items.slice(0, 20).map((event) => {
       if (event.images !== undefined) {
         return event.images.map((e) => {
           if (e.link.match(pattern)[0] !== ".mp4") {
@@ -105,6 +86,16 @@ export default class SearchingBar extends React.Component {
     return result;
   };
 
+  updateSearch = (search) => {
+    if (search === "") {
+      this.setState({ ...this.state, dataSource: [response.data] });
+    } else {
+      this.setState({ search }, () => {
+        this.fetchData(search);
+      });
+    }
+  };
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -118,22 +109,27 @@ export default class SearchingBar extends React.Component {
         <SearchBar
           round
           searchIcon={{ size: 30 }}
-          onChangeText={(text) => this.SearchFilterFunction(text)}
-          onClear={(text) => this.SearchFilterFunction("")}
+          onChangeText={this.updateSearch}
           placeholder="Search"
           value={this.state.search}
         />
-        <ScrollView style={{ flex: 1,height:80}}> 
+        <ScrollView style={{ flex: 1, height: 80 }}>
           <FlatList
-            contentContainerStyle={{ alignItems: 'center', padding: 20 }}
+            contentContainerStyle={{ alignItems: "center", padding: 20 }}
             data={this.state.dataSource}
             ItemSeparatorComponent={this.ListViewItemSeparator}
             renderItem={({ item }) => {
               const links = this.getLinks(item);
               return links.map((event) => {
                 if (event !== undefined) {
-                  return (<View style={{ flex: 1 }}>
-                    <Image style={styles.tinyLogo} source={{ uri: event }} /></View>
+                  return (
+                    <View style={{ flex: 1 }}>
+                      <Image
+                        style={styles.tinyLogo}
+                        source={{ uri: event }}
+                        key={Math.floor(Math.random() * 100000)}
+                      />
+                    </View>
                   );
                 }
               });
@@ -142,7 +138,7 @@ export default class SearchingBar extends React.Component {
             style={{ marginTop: 10 }}
             keyExtractor={(item, index) => index.toString()}
           />
-        </ScrollView> 
+        </ScrollView>
       </View>
     );
   }
@@ -154,7 +150,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
     marginTop: 100,
-     marginTop: Platform.OS == "ios" ? 40 : 0,
+    marginTop: Platform.OS == "ios" ? 40 : 0,
   },
   tinyLogo: {
     flex: 1,
@@ -164,7 +160,6 @@ const styles = StyleSheet.create({
     // width: "95%",
     // height: 300,
     margin: 10,
-
   },
   textStyle: {
     padding: 20,

@@ -48,7 +48,8 @@ export default function App() {
         <StatusBar style="auto" />
         <Upload />
       </View>
-
+    )
+  }
   
   function WelcomeScreen({ navigation }) {
     return (

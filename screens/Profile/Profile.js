@@ -16,9 +16,9 @@ const Profile = () => {
   const [UserData, setUserData] = useState(null);
 
   const imagedata = [
-    { key: 0, image: { uri: "https://picsum.photos/200" } },
+    { key: 0, image: { uri: "https://woodgreen.org.uk/image/image/image/V8Iw3SL87ubcIekoP1DmmhekPFXPNbBL5yB4JpVR.jpeg?w=800&h=422&fit=crop-center" } },
     { key: 1, image: { uri: "https://picsum.photos/200" } },
-    { key: 2, image: { uri: "https://picsum.photos/200" } },
+   
   ];
 
   const RenderImage = ({ item }) => {
